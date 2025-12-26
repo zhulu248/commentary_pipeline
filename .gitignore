@@ -1,0 +1,7 @@
+
+# Secrets
+07_ai_extract/OpenAI_Key.txt
+*.key
+*.pem
+.env
+

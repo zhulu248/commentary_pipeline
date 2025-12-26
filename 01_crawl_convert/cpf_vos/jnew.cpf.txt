@@ -1,0 +1,10 @@
+---
+type: article
+title: jnew
+source: https://www.biblicaltheology.org/jnew.pdf
+extracted_at: 2025-12-16T04:30:30-05:00
+---
+
+# extraction_engine: pdf/epub:pymupdf
+
+[P000001] (Hierousalem kaine): This name occurs in Revelation 21:2 (21:10, “holy city”). The conception is based on prophecies which predict a glorious future to Jerusalem after the judgment (Isaiah 52:1). In Revelation, however, it is not descriptive of any actual locality on earth, but allegorically depicts the final state of the church (“the bride,” “the wife of the Lamb,” Revelation 21:2, 9), when the new heaven and the new earth shall have come into being. The picture is drawn from a twofold point of view: the new Jerusalem is a restoration of Paradise (Revelation 21:6, 22:1, 2, 14); it is also the ideal of theocracy realized (Revelation 21:3, 12, 14, 22). The latter viewpoint explains the peculiar representation that the city descends “out of heaven from God” (Revelation 21:2, 10), which characterizes it as, on the one hand, a product of God’s supernatural workmanship, and as, on the other hand, the culmination of the historic process of redemption. In other New Testament passages, where theocratic point of view is less prominent, the antitypical Jerusalem appears as having its seat in heaven instead of, as here,
