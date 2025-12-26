@@ -1,0 +1,3 @@
+python batch_convert_from_page.py "https://www.monergism.com/search?keywords=vos&format=46" --type article --outdir cpf_vos --pdf-engine pymupdf --all-pages
+python batch_convert_from_page.py "https://www.monergism.com/search?keywords=vos&format=46" --type article --outdir cpf_vos --pdf-engine auto --all-pages --same-domain
+python batch_convert_from_page.py "https://www.monergism.com/search?keywords=vos&format=46" --type article --outdir cpf_vos --pdf-engine pymupdf --all-pages --title-prefix "Vos - "
