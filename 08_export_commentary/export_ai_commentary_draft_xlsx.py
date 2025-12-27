@@ -20,7 +20,7 @@ from pathlib import Path
 from openpyxl import Workbook
 
 
-DESCRIPTION = """Export AI commentary draft to XLSX for manual review.\n\nExample:\n  python 08_export_commentary/export_ai_commentary_draft_xlsx.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.xlsx\n"""
+DESCRIPTION = """Export AI commentary draft to XLSX for manual review.\n\nExample (copy/paste):\n  python 08_export_commentary/export_ai_commentary_draft_xlsx.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.xlsx\n"""
 
 EXAMPLES = """Examples (copy/paste ready from repo root):
   # Export all ai_extractions rows to Excel

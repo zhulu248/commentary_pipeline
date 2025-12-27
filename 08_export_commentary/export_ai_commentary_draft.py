@@ -191,7 +191,7 @@ def fetch_citations_block(con: sqlite3.Connection, extraction_id: int, max_lines
     return (" | ".join(sources), "\n".join(evidence_lines))
 
 
-DESCRIPTION = """Export AI commentary draft to CSV for manual review.\n\nExample:\n  python 08_export_commentary/export_ai_commentary_draft.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.csv\n"""
+DESCRIPTION = """Export AI commentary draft to CSV for manual review.\n\nExample (copy/paste):\n  python 08_export_commentary/export_ai_commentary_draft.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.csv\n"""
 
 EXAMPLES = """Examples (copy/paste ready from repo root):
   # Export all OK rows to CSV in the project root

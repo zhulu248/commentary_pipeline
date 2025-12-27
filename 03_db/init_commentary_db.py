@@ -39,7 +39,7 @@ CREATE INDEX IF NOT EXISTS idx_paragraphs_doc ON paragraphs(doc_id);
 -- extracted_notes (LLM outputs)
 """
 
-DESCRIPTION = """Initialize commentary.db schema.\n\nExample:\n  python 03_db/init_commentary_db.py ./commentary.db\n"""
+DESCRIPTION = """Initialize commentary.db schema.\n\nExample (copy/paste):\n  python 03_db/init_commentary_db.py ./commentary.db\n"""
 
 EXAMPLES = """Examples (run from repo root):
   # Create commentary.db alongside the scripts

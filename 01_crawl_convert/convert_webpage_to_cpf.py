@@ -321,7 +321,7 @@ def convert_webpage(
     print(f"Engine: {engine_note}")
     print(f"Title: {meta.title}")
 
-DESCRIPTION = """Convert a single webpage URL into CPF.\n\nExample:\n  python 01_crawl_convert/convert_webpage_to_cpf.py \"https://www.monergism.com/second-coming-our-lord-and-millennium\" --type article -o output.cpf.txt\n"""
+DESCRIPTION = """Convert a single webpage URL into CPF.\n\nExample (copy/paste):\n  python 01_crawl_convert/convert_webpage_to_cpf.py \"https://www.monergism.com/second-coming-our-lord-and-millennium\" --type article -o output.cpf.txt\n"""
 
 EXAMPLES = """Examples (copy/paste ready):
   # Convert a single article with requests and write to output.cpf.txt

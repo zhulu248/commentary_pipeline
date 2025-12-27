@@ -90,7 +90,7 @@ def pick_text(edit_text: str, ai_summary: str, ai_bullets: str) -> str:
     return norm(ai_bullets)
 
 
-DESCRIPTION = """Export merged final commentary into a SQLite table for website use.\n\nExample:\n  python 10_finalize_export/export_final_commentary_sqlite.py --commentary-db ./commentary.db --bible-db ./bible.db --out-db ./publish.db --only-status ok --reset\n"""
+DESCRIPTION = """Export merged final commentary into a SQLite table for website use.\n\nExample (copy/paste):\n  python 10_finalize_export/export_final_commentary_sqlite.py --commentary-db ./commentary.db --bible-db ./bible.db --out-db ./publish.db --only-status ok --reset\n"""
 
 EXAMPLES = """Examples (copy/paste ready from repo root):
   # Export OK rows into publish.db (used by the static viewer)

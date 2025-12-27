@@ -45,7 +45,7 @@ def pick_text(edit_text: str, ai_summary: str, ai_bullets: str) -> str:
     return norm(ai_bullets)
 
 
-DESCRIPTION = """Export final merged commentary to CSV.\n\nExample:\n  python 10_finalize_export/export_final_commentary_csv.py --commentary-db ./commentary.db --bible-db ./bible.db --out final_commentary.csv --only-status ok\n"""
+DESCRIPTION = """Export final merged commentary to CSV.\n\nExample (copy/paste):\n  python 10_finalize_export/export_final_commentary_csv.py --commentary-db ./commentary.db --bible-db ./bible.db --out final_commentary.csv --only-status ok\n"""
 
 EXAMPLES = """Examples (copy/paste ready from repo root):
   # Export all OK rows to final_commentary.csv in the project root

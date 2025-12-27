@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Iterable
 
 
-DESCRIPTION = """Check whether a commentary edits CSV has any edited rows.\n\nExample:\n  python 09_import_edits/check_csv_edits.py ./08_export_commentary/commentary_draft.csv\n"""
+DESCRIPTION = """Check whether a commentary edits CSV has any edited rows.\n\nExample (copy/paste):\n  python 09_import_edits/check_csv_edits.py ./08_export_commentary/commentary_draft.csv\n"""
 
 EXAMPLES = """Examples (copy/paste ready from repo root):
   # Check the default draft CSV exported earlier

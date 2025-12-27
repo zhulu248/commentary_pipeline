@@ -33,7 +33,7 @@ CREATE INDEX IF NOT EXISTS idx_verses_lookup
 """
 
 
-DESCRIPTION = """Initialize bible.db schema for verses.\n\nExample:\n  python 04_bible_import/init_bible_db.py ./bible.db\n"""
+DESCRIPTION = """Initialize bible.db schema for verses.\n\nExample (copy/paste):\n  python 04_bible_import/init_bible_db.py ./bible.db\n"""
 
 EXAMPLES = """Examples (run from repo root):
   # Create bible.db alongside the scripts
