@@ -45,8 +45,26 @@ def pick_text(edit_text: str, ai_summary: str, ai_bullets: str) -> str:
     return norm(ai_bullets)
 
 
+DESCRIPTION = """Export final merged commentary to CSV.\n\nExample:\n  python 10_finalize_export/export_final_commentary_csv.py --commentary-db ./commentary.db --bible-db ./bible.db --out final_commentary.csv --only-status ok\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Export all OK rows to final_commentary.csv in the project root
+  python 10_finalize_export/export_final_commentary_csv.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out final_commentary.csv --only-status ok
+
+  # Export everything (no status filter) to a custom folder and use different Bible versions
+  python 10_finalize_export/export_final_commentary_csv.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out ./out/final_commentary_full.csv \
+    --only-status "" --kjv NKJV --cuv CUVS
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Export final merged commentary to CSV.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--commentary-db", required=True)
     ap.add_argument("--bible-db", required=True)
     ap.add_argument("--out", required=True)

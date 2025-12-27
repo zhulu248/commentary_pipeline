@@ -247,8 +247,27 @@ def format_verse_ref(vk: VerseKey) -> str:
     return f"{vk.book_osis} {vk.chapter}:{vk.verse_start}-{vk.verse_end}"
 
 
+DESCRIPTION = """Extract Bible-verse commentary from tagged paragraphs via OpenAI.\n\nExample:\n  OPENAI_API_KEY=sk-... python 07_ai_extract/ai_extract_commentary.py --commentary-db ./commentary.db --bible-db ./bible.db --model gpt-5 --prompt-version v1 --limit 5 --max-paras-per-verse 8 --sleep 0.5\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Small batch run using the sample DBs in this repo
+  OPENAI_API_KEY=sk-... python 07_ai_extract/ai_extract_commentary.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db \
+    --model gpt-5 --prompt-version v1 --limit 5 --max-paras-per-verse 8 --sleep 0.5 --zh
+
+  # Resume later with the same model/prompt and skip completed verses
+  OPENAI_API_KEY=sk-... python 07_ai_extract/ai_extract_commentary.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db \
+    --model gpt-4o --prompt-version v1 --resume --limit 0
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--commentary-db", required=True)
     ap.add_argument("--bible-db", required=True)
     ap.add_argument("--model", default="gpt-5")

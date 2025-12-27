@@ -191,8 +191,26 @@ def fetch_citations_block(con: sqlite3.Connection, extraction_id: int, max_lines
     return (" | ".join(sources), "\n".join(evidence_lines))
 
 
+DESCRIPTION = """Export AI commentary draft to CSV for manual review.\n\nExample:\n  python 08_export_commentary/export_ai_commentary_draft.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.csv\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Export all OK rows to CSV in the project root
+  python 08_export_commentary/export_ai_commentary_draft.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.csv
+
+  # Export only rows that lack commentary to a custom folder
+  python 08_export_commentary/export_ai_commentary_draft.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db \
+    --only-status ok --only-has-commentary 0 --limit 0 --out ./out/commentary_needs_review.csv
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Export AI commentary draft to CSV for manual review.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--commentary-db", required=True, help="Path to commentary.db")
     ap.add_argument("--bible-db", required=True, help="Path to bible.db")
     ap.add_argument("--out", default="commentary_draft.csv", help="Output CSV path")

@@ -13,6 +13,17 @@ from pathlib import Path
 from datetime import datetime
 
 
+DESCRIPTION = """Build a static HTML viewer from publish.db (final_commentary table).\n\nExample:\n  python 11_static_viewer/build_static_viewer.py --db ./publish.db --outdir ./viewer\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Rebuild the viewer folder from the publish.db produced by export_final_commentary_sqlite
+  python 11_static_viewer/build_static_viewer.py --db ./publish.db --outdir ./viewer
+
+  # Write the viewer to a custom output directory
+  python 11_static_viewer/build_static_viewer.py --db ./publish.db --outdir ./dist/viewer
+"""
+
+
 def get_columns(con: sqlite3.Connection, table: str) -> list[str]:
     rows = con.execute(f"PRAGMA table_info({table});").fetchall()
     # PRAGMA table_info: (cid, name, type, notnull, dflt_value, pk)
@@ -239,7 +250,11 @@ render();
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Build a static HTML viewer from publish.db (final_commentary table).")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--db", required=True, help="Path to publish.db")
     ap.add_argument("--outdir", default="viewer", help="Output folder (will be created)")
     args = ap.parse_args()

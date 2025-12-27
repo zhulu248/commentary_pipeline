@@ -39,8 +39,23 @@ CREATE INDEX IF NOT EXISTS idx_paragraphs_doc ON paragraphs(doc_id);
 -- extracted_notes (LLM outputs)
 """
 
+DESCRIPTION = """Initialize commentary.db schema.\n\nExample:\n  python 03_db/init_commentary_db.py ./commentary.db\n"""
+
+EXAMPLES = """Examples (run from repo root):
+  # Create commentary.db alongside the scripts
+  python 03_db/init_commentary_db.py ./commentary.db
+
+  # Create it in a sibling folder (the folder will be created if missing)
+  python 03_db/init_commentary_db.py ../data/commentary.db
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Initialize commentary.db schema.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("db", help="Path to SQLite DB (will be created if missing).")
     args = ap.parse_args()
 

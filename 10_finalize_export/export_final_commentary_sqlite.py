@@ -90,6 +90,20 @@ def pick_text(edit_text: str, ai_summary: str, ai_bullets: str) -> str:
     return norm(ai_bullets)
 
 
+DESCRIPTION = """Export merged final commentary into a SQLite table for website use.\n\nExample:\n  python 10_finalize_export/export_final_commentary_sqlite.py --commentary-db ./commentary.db --bible-db ./bible.db --out-db ./publish.db --only-status ok --reset\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Export OK rows into publish.db (used by the static viewer)
+  python 10_finalize_export/export_final_commentary_sqlite.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out-db ./publish.db --only-status ok --reset
+
+  # Append all statuses to a custom SQLite file without dropping existing rows
+  python 10_finalize_export/export_final_commentary_sqlite.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out-db ./out/final_commentary.db \
+    --only-status "" --kjv KJV --cuv CUVS
+"""
+
+
 def ensure_table(con_out: sqlite3.Connection, reset: bool) -> None:
     if reset:
         con_out.execute("DROP TABLE IF EXISTS final_commentary;")
@@ -234,7 +248,11 @@ def fetch_verse_range_text(
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Export merged final commentary into a SQLite table for website use.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--commentary-db", required=True)
     ap.add_argument("--bible-db", required=True)
     ap.add_argument("--out-db", required=True)
