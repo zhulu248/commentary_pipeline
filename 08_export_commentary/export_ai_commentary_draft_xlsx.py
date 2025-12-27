@@ -20,6 +20,20 @@ from pathlib import Path
 from openpyxl import Workbook
 
 
+DESCRIPTION = """Export AI commentary draft to XLSX for manual review.\n\nExample (copy/paste):\n  python 08_export_commentary/export_ai_commentary_draft_xlsx.py --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.xlsx\n"""
+
+EXAMPLES = """Examples (copy/paste ready from repo root):
+  # Export all ai_extractions rows to Excel
+  python 08_export_commentary/export_ai_commentary_draft_xlsx.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db --out commentary_draft.xlsx
+
+  # Limit to 100 rows that have commentary before sharing for review
+  python 08_export_commentary/export_ai_commentary_draft_xlsx.py \
+    --commentary-db ./commentary.db --bible-db ./bible.db \
+    --only-status ok --limit 100 --out ./out/commentary_draft_top100.xlsx
+"""
+
+
 def get_table_columns(con: sqlite3.Connection, table: str) -> set[str]:
     rows = con.execute(f"PRAGMA table_info({table});").fetchall()
     # rows: cid, name, type, notnull, dflt_value, pk
@@ -55,7 +69,11 @@ def pick_optional(cols: set[str], candidates: list[str]) -> str | None:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Export ai_extractions into an Excel file for safe manual editing.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("--commentary-db", required=True)
     ap.add_argument("--bible-db", required=True)
     ap.add_argument("--out", default="commentary_draft.xlsx")

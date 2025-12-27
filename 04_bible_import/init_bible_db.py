@@ -33,8 +33,23 @@ CREATE INDEX IF NOT EXISTS idx_verses_lookup
 """
 
 
+DESCRIPTION = """Initialize bible.db schema for verses.\n\nExample (copy/paste):\n  python 04_bible_import/init_bible_db.py ./bible.db\n"""
+
+EXAMPLES = """Examples (run from repo root):
+  # Create bible.db alongside the scripts
+  python 04_bible_import/init_bible_db.py ./bible.db
+
+  # Create bible.db in a shared data folder (folder will be created if missing)
+  python 04_bible_import/init_bible_db.py ../data/bible.db
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("db", help="Path to bible.db")
     args = ap.parse_args()
 

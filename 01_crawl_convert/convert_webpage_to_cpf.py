@@ -324,8 +324,38 @@ def convert_webpage(
     print(f"Engine: {engine_note}")
     print(f"Title: {meta.title}")
 
+DESCRIPTION = """Convert a single webpage URL into CPF.\n\nExample (copy/paste):\n  python 01_crawl_convert/convert_webpage_to_cpf.py \"https://www.monergism.com/second-coming-our-lord-and-millennium\" --type article -o output.cpf.txt\n"""
+
+EXAMPLES = """Examples (copy/paste ready):
+  # Convert a single article with requests and write to output.cpf.txt
+  python 01_crawl_convert/convert_webpage_to_cpf.py \
+    "https://www.monergism.com/second-coming-our-lord-and-millennium" \
+    --type article \
+    -o output.cpf.txt
+
+  # Force Playwright (for sites blocking requests) and save under ./out/
+  python 01_crawl_convert/convert_webpage_to_cpf.py \
+    "https://kerux.com/doc/0102A1.html" \
+    --type article \
+    --fetch playwright \
+    --outdir ./out
+
+  # Convert a book-style page while overriding title/author metadata
+  python 01_crawl_convert/convert_webpage_to_cpf.py \
+    "https://www.ccel.org/ccel/edwards/sermons" \
+    --type book \
+    --title "Jonathan Edwards Sermons" \
+    --author "Jonathan Edwards" \
+    -o edwards_sermons.cpf.txt
+"""
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Convert a single webpage URL into CPF.")
+    ap = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=EXAMPLES,
+    )
     ap.add_argument("url", help="Webpage URL")
     ap.add_argument("--type", required=True, choices=["book", "article"])
     ap.add_argument("--title", default="")
@@ -340,15 +370,30 @@ def main() -> int:
 
     args = ap.parse_args()
 
+    # Basic URL validation up front so users do not accidentally pass placeholders
+    # (e.g., "<url>") or bare hostnames without a scheme.
+    raw_url = (args.url or "").strip()
+    if not raw_url or "<" in raw_url or ">" in raw_url:
+        raise SystemExit("Please replace <url> with an actual http(s) URL, e.g. https://example.com")
+
+    parsed = urlparse(raw_url)
+    if not parsed.scheme:
+        raise SystemExit(f"URL is missing a scheme (http/https): {raw_url}")
+    if parsed.scheme not in {"http", "https"}:
+        raise SystemExit(f"Unsupported URL scheme '{parsed.scheme}'. Use http or https: {raw_url}")
+    if not parsed.netloc:
+        raise SystemExit(f"URL is missing a hostname: {raw_url}")
+    url = parsed.geturl()
+
     if args.out.strip():
         out_path = Path(args.out).expanduser().resolve()
     else:
         outdir = Path(args.outdir).expanduser().resolve() if args.outdir.strip() else Path.cwd()
-        placeholder = sanitize_filename(args.title.strip() or default_title_from_url(args.url))
+        placeholder = sanitize_filename(args.title.strip() or default_title_from_url(url))
         out_path = outdir / f"{placeholder}.cpf.txt"
 
     convert_webpage(
-        url=args.url,
+        url=url,
         out_path=out_path,
         doc_type=args.type,
         title=args.title,
